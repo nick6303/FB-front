@@ -1,0 +1,158 @@
+$base_color: #d2b055
+$base_blue: #33a1db
+$base_gray: #f2f2f2
+$ft_bg: #004179
+$base_orange: #ea5703
+$base_gold: #b8803b
+
+/*font-size*/
+@mixin font-size($size: 16) 
+	font-size: ($size/16) + rem
+@function px($px)
+	@return $px / 16 * 1rem
+
+/*RWD*/
+
+
+/*transiton*/
+@mixin trans($move: 0s, $wait: 0s, $type: all, $way: ease) 
+	-webkit-transition: $type $move $way $wait
+	-moz-transition: $type $move $way $wait
+	-ms-transition: $type $move $way $wait
+	-o-transition: $type $move $way $wait
+	transition: $type $move $way $wait
+/*transiton*/
+
+
+/*hide word*/
+@mixin hide_word($line:0) 
+	overflow: hidden
+	text-overflow: ellipsis
+	display: -webkit-box
+	-webkit-line-clamp: $line
+	-webkit-box-orient: vertical
+/*hide word*/
+
+@mixin bgSeting
+	background-repeat: no-repeat
+	background-position: center
+	background-size: cover
+
+
+/* display: flex 置中*/
+@mixin flex-center 
+	display: flex
+	justify-content: center
+	align-items: center
+/* display: flex 置中*/
+
+
+/* display: flex 左右至頂*/
+@mixin flex-space-between 
+	display: flex
+	justify-content: space-between
+	align-items: center
+/* display: flex 左右至頂*/
+
+
+/* display: flex 向左靠*/
+@mixin flex-left 
+	display: flex
+	justify-content: center
+	align-items: flex-start
+	flex-direction: column
+/* display: flex 向左靠*/
+
+
+/* display: flex 向右靠*/
+@mixin flex-right 
+	display: flex
+	justify-content: center
+	align-items: flex-end
+	flex-direction: column
+/* display: flex 向右靠*/
+
+@mixin size($width,$height:$width)
+	width: $width
+	height: $height
+
+
+/* 偽元素線條*/
+@mixin fakeLine($width:1px, $height:1px, $backgroundColor:#000) 
+	content: ""
+	display: block
+	width: $width
+	height: $height
+	background-color: $backgroundColor
+/* 偽元素線條*/
+
+
+/*基礎燈箱設定*/
+@mixin basicLibox($width:100vw, $height:100%) 
+	position: fixed
+	top: 0
+	left: 0
+	width: $width
+	height: $height
+/*基礎燈箱設定*/
+
+
+/*↓十字↓*/
+@mixin cross($width:26px, $height:26px) 
+	position: relative
+	width: $width
+	height: $height
+
+@mixin cross_before($width:26px, $color:#959595) 
+	@include fakeLine($width, 2px, $color)
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+@mixin cross_after($height:26px, $color:#959595) 
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	@include fakeLine(2px, $height, $color)
+/*↑十字↑*/
+
+@mixin borderTop($width:100%,$height:1px,$bgc:#000)
+	position: absolute
+	top: 0
+	left: 50%
+	transform: translateX(-50%)
+	+fakeLine($width,$height,$bgc)
+
+@mixin borderBottom($width:100%,$height:1px,$bgc:#000)
+	position: absolute
+	bottom: 0
+	left: 50%
+	transform: translateX(-50%)
+	+fakeLine($width,$height,$bgc)
+
+@mixin link
+	font-size: px(12)
+	color: rgba(255,255,255,.6)
+	transition: all .4s ease
+	font-family: 'CenturyGothicRegular',微軟正黑體
+	letter-spacing: 0
+	position: relative
+	&:hover
+		color: #fff
+		&:before
+			transform: scaleX(1)
+			border-right: 0px solid transparent
+			transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1)
+			transition-delay: .1s
+	&:before
+		position: absolute
+		top: calc(50% - 0.5px) 
+		right: 0
+		+fakeLine(100%,1px,transparent)
+		border-top: 1px solid #999999
+		border-right: 100px solid transparent
+		transform: scaleX(0)
+		transform-origin: 0 50%
+		transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 

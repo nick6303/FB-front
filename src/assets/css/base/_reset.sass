@@ -1,0 +1,925 @@
+
+// font-family: 'icomoon'
+
+// ===============  iphone X   ===============
+.container
+  padding-top: constant(safe-area-inset-top)
+  padding-right: constant(safe-area-inset-right)
+  padding-bottom: constant(safe-area-inset-bottom)
+  padding-left: constant(safe-area-inset-left)
+
+// ===============  HTML5 display definitions  ===============
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary
+  display: block
+
+audio,
+canvas,
+video
+  display: inline-block
+
+audio:not([controls])
+  display: none
+  height: 0
+
+[hidden]
+  display: none
+
+// ===============  Base  ==============
+html
+  width: 100%
+  height: 100%
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+  -webkit-font-smoothing: antialiased
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video 
+  margin: 0
+  padding: 0
+  letter-spacing: 1px
+  font-size: 100%
+  font-weight: normal
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+  border: 0
+  vertical-align: baseline
+  box-sizing: border-box
+
+body
+  line-height: 1
+  height: 100%
+  //text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  -moz-font-feature-settings: 'liga', 'kern'
+  -webkit-overflow-scrolling: touch
+
+*
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+iframe
+  display: block
+
+a
+  color: inherit
+  text-decoration: none
+
+a:active,
+a:hover
+  outline: 0
+  text-decoration: none
+
+img
+  border: 0
+  display: block
+
+  //流動圖片設定
+  max-width: 100%
+  height: auto
+
+svg:not(:root)
+  overflow: hidden
+
+figure
+  margin: 0
+
+dl,
+menu,
+ol,
+ul
+  margin: 0
+
+ul
+  list-style: none
+  list-style-image: none
+
+table
+  border-collapse: collapse
+  border-spacing: 0
+
+// ===============  Forms  ===============
+form
+  margin: 0
+
+fieldset
+  border: 1px solid #c0c0c0
+  margin: 0 2px
+  padding: 0.35em 0.625em 0.75em
+
+legend
+  border: 0
+  padding: 0
+  white-space: normal
+  margin-left: -7px
+
+button,
+input
+  line-height: normal
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"]
+  -webkit-appearance: button
+  cursor: pointer
+  overflow: visible
+
+button[disabled],
+input[disabled]
+  cursor: default
+
+input[type="checkbox"],
+input[type="radio"]
+  box-sizing: border-box
+  padding: 0
+
+input[type="search"]
+  -webkit-appearance: textfield
+  -moz-box-sizing: content-box
+  -webkit-box-sizing: content-box
+  box-sizing: content-box
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration
+  -webkit-appearance: none
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  margin: 0
+
+button::-moz-focus-inner,
+input::-moz-focus-inner
+  border: 0
+  padding: 0
+
+textarea
+  overflow: auto
+  vertical-align: top
+  resize: none
+  &::-webkit-scrollbar 
+    width: 2px
+  &::-webkit-scrollbar-track 
+    -webkit-box-shadow: inset 0 0 6px #c2c2c2
+  &::-webkit-scrollbar-thumb 
+    border-radius: 10px
+    -webkit-box-shadow: inset 0 0 6px #878787
+
+
+//input
+/*去除input藍色框框*/
+input,
+button,
+select,
+textarea
+  outline: none
+
+*:focus
+  outline: none
+
+input:focus,
+textarea:focus
+  outline: none
+
+//placeholder 點一下後快速消失
+input::placeholder
+  transition: all .4s ease
+input:focus::placeholder 
+  opacity: 0
+
+
+
+picture
+  overflow: hidden
+  font-size: 0
+
+// ===============  Typography  ===============
+abbr[title]
+  border-bottom: 1px dotted
+
+b,
+strong
+  font-weight: bold
+
+blockquote
+  margin: 1em 40px
+
+mark
+  background: #ff0
+  color: #000
+
+pre
+  white-space: pre
+  white-space: pre-wrap
+  word-wrap: break-word
+
+q
+  quotes: none
+
+q:before,
+q:after
+  content: ''
+  content: none
+
+small
+  font-size: 75%
+
+sub,
+sup
+  font-size: 75%
+  line-height: 0
+  position: relative
+  vertical-align: baseline
+
+sup
+  top: -0.5em
+
+sub
+  bottom: -0.25em
+
+hr
+  height: 1px
+  border: none
+
+// ===============  Global  ===============
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p
+  font-weight: inherit
+  line-height: 1.5
+  max-width: 100%
+
+//----------------------animation-------------------
+.animated
+  -webkit-animation-duration: 1s
+  animation-duration: 1s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+
+.animated-slow
+  -webkit-animation-duration: 2s
+  animation-duration: 2s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+
+.hide,
+.wp1,
+.wp2,
+.wp3,
+.wp4,
+.wp5,
+.wp6
+  visibility: hidden
+
+.fadeInDown,
+.fadeInUp,
+.pulse,
+.fadeIn,
+.bounceIn
+  visibility: visible !important
+
+.delay-02s
+  animation-delay: 0.2s
+  -webkit-animation-delay: 0.2s
+
+.delay-03s
+  animation-delay: 0.3s
+  -webkit-animation-delay: 0.3s
+
+.delay-05s
+  animation-delay: 0.5s
+  -webkit-animation-delay: 0.5s
+
+.delay-06s
+  animation-delay: 0.6s
+  -webkit-animation-delay: 0.6s
+
+.delay-07s
+  animation-delay: 0.7s
+  -webkit-animation-delay: 0.7s
+
+.delay-08s
+  animation-delay: 0.8s
+  -webkit-animation-delay: 0.8s
+
+.delay-09s
+  animation-delay: 0.9s
+  -webkit-animation-delay: 0.9s
+
+.delay-10s
+  animation-delay: 1s
+  -webkit-animation-delay: 1s
+
+.delay-15s
+  animation-delay: 1.5s
+  -webkit-animation-delay: 1.5s
+
+.delay-20s
+  animation-delay: 2s
+  -webkit-animation-delay: 2s
+
+.delay-25s
+  animation-delay: 2.5s
+  -webkit-animation-delay: 2.5s
+
+.delay-30s
+  animation-delay: 3s
+  -webkit-animation-delay: 3s
+
+.delay-35s
+  animation-delay: 3.5s
+  -webkit-animation-delay: 3.5s
+
+@mixin keyframesWidth($width:0)
+  @keyframes w#{$width}
+    0%
+      width: 0px
+    100%
+      width: #{$width}px
+
+@mixin keyframesHeight($height:0)
+  @keyframes h#{$height}
+    0%
+      height: 0px
+    100%
+      height: #{$height}px
+
+@-webkit-keyframes fadeInUp
+  from
+    opacity: 0
+    -webkit-transform: translateY(25%)
+    transform: translateY(25%)
+
+  to
+    opacity: 1
+    -webkit-transform: none
+    transform: none
+
+@keyframes fadeInUp
+  from
+    opacity: 0
+    -webkit-transform: translateY(25%)
+    transform: translateY(25%)
+
+  to
+    opacity: 1
+    -webkit-transform: translate(0)
+    transform: translate(0)
+
+.fadeInUp
+  -webkit-animation-name: fadeInUp
+  animation-name: fadeInUp
+  animation-duration: .8s
+
+@-webkit-keyframes fadeInUp100
+  from
+    opacity: 0
+    -webkit-transform: translateY(100%)
+    transform: translateY(100%)
+  to
+    opacity: 1
+    -webkit-transform: none
+    transform: none
+
+@keyframes fadeInUp100
+  from
+    opacity: 0
+    -webkit-transform: translateY(100%)
+    transform: translateY(100%)
+  to
+    opacity: 1
+    -webkit-transform: translate(0)
+    transform: translate(0)
+
+@-webkit-keyframes fadeIn
+  from
+    opacity: 0
+
+  to
+    opacity: 1
+
+@keyframes fadeIn
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+.fadeIn
+  -webkit-animation-name: fadeIn
+  animation-name: fadeIn
+
+@-webkit-keyframes fadeInDown
+  from
+    opacity: 0
+    transform: translateY(-50%)
+  to
+    opacity: 1
+    transform: none
+
+@keyframes fadeInDown
+  from
+    opacity: 0
+    transform: translateY(-50%)
+
+  to
+    opacity: 1
+    transform: translateY(0%)
+
+.fadeInDown
+  animation-name: fadeInDown
+  animation-duration: .8s
+  -webkit-animation-duration: .8s
+  animation-delay: .2s
+  -webkit-animation-delay: .2s
+
+
+@-webkit-keyframes fadeOut
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+@keyframes fadeOut
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+.fadeOut
+  -webkit-animation-name: fadeOut
+  animation-name: fadeOut
+
+@-webkit-keyframes fadeOutUp
+  from
+    opacity: 1
+    transform: translateY(0%)
+  to
+    opacity: 0
+    transform: translateY(-50%)
+
+@keyframes fadeOutUp
+  from
+    opacity: 1
+    transform: translateY(0%)
+  to
+    opacity: 0
+    transform: translateY(-50%)
+
+.fadeOutUp
+  -webkit-animation-name: fadeOutUp
+  animation-name: fadeOutUp
+
+@-webkit-keyframes fadeOutLeft
+  from
+    opacity: 1
+    transform: translateX(0%)
+  to
+    opacity: 0
+    transform: translateX(-50%)
+
+@keyframes fadeOutLeft
+  from
+    opacity: 1
+    transform: translateX(0%)
+  to
+    opacity: 0
+    transform: translateX(-50%)
+
+@keyframes fadeOutDown 
+  from 
+    opacity: 1
+    transform: translateY(0%)
+  to 
+    opacity: 0
+    transform: translateY(50%)
+
+.fadeOutDown 
+  -webkit-animation-name: fadeOutDown
+  animation-name: fadeOutDown
+
+
+.fadeOutLeft
+  -webkit-animation-name: fadeOutUp
+  animation-name: fadeOutUp
+
+@-webkit-keyframes fadeOutRight 
+  from 
+    opacity: 1
+    transform: translateX(0%)
+  to 
+    opacity: 0
+    transform: translateX(50%)
+    
+
+
+@keyframes fadeOutRight 
+  from 
+    opacity: 1
+    transform: translateX(0%)
+  to 
+    opacity: 0
+    transform: translateX(50%)
+
+.fadeOutRight 
+  -webkit-animation-name: fadeOutRight
+  animation-name: fadeOutRight
+
+// fadeInLeft
+@keyframes fadeInLeft
+  0%
+    opacity: 0
+    transform: translateX(-50%)
+
+  100%
+    opacity: 1
+    transform: translateX(0)
+
+.fadeInLeft
+  -webkit-animation-name: fadeInLeft
+  animation-name: fadeInLeft
+
+// fadeInRight
+@keyframes fadeInRight
+  0%
+    opacity: 0
+    transform: translateX(50%)
+  100%
+    opacity: 1
+    transform: translateX(0)
+
+.fadeInRight
+  -webkit-animation-name: fadeInRight
+  animation-name: fadeInRight
+
+@keyframes slideOutUp
+  0%
+    transform: translateY(0%)
+  100%
+    transform: translateY(-100%)
+
+.slideOutUp
+  -webkit-animation-name: slideOutUp
+  animation-name: slideOutUp
+
+@keyframes slideOutDown
+  0% 
+    transform: translateY(0%)
+  100% 
+    transform: translateY(101%)
+
+.slideOutDown 
+  -webkit-animation-name: slideOutDown
+  animation-name: slideOutDown
+
+@keyframes slideOutLeft
+  0% 
+    transform: translateX(0%)
+  100% 
+    transform: translateX(-101%)
+
+.slideOutLeft 
+  -webkit-animation-name: slideOutLeft
+  animation-name: slideOutLeft
+
+@keyframes slideOutRight
+  0% 
+    transform: translateX(0%)
+  100% 
+    transform: translateX(101%)
+
+.slideOutRight 
+  -webkit-animation-name: slideOutRight
+  animation-name: slideOutRight
+
+
+@keyframes slideInDown
+  0%
+    transform: translateY(-101%)
+  100%
+    transform: translateY(0%)
+
+.slideInDown
+  -webkit-animation-name: slideInDown
+  animation-name: slideInDown
+
+@keyframes slideInUp
+  0%
+    transform: translateY(101%)
+  100%
+    transform: translateY(0%)
+
+.slideInUp
+  -webkit-animation-name: slideInUp
+  animation-name: slideInUp
+
+@keyframes slideInLeft
+  0% 
+    transform: translateX(-101%)
+  100% 
+    transform: translateX(0%)
+
+.slideInLeft 
+  -webkit-animation-name: slideInLeft
+  animation-name: slideInLeft
+
+@keyframes slideInRight
+  0% 
+    transform: translateX(101%)
+  100% 
+    transform: translateX(0%)
+
+.slideInRight 
+  -webkit-animation-name: slideInRight
+  animation-name: slideInRight
+
+@keyframes flipInX
+  from
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg)
+    animation-timing-function: ease-in
+    opacity: 0
+  40%
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg)
+    animation-timing-function: ease-in
+  60% 
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg)
+    opacity: 1
+  80% 
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg)
+    opacity: 1
+  to 
+    transform: perspective(400px)
+    opacity: 1
+
+@keyframes flipInY
+  from
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg)
+    animation-timing-function: ease-in
+    opacity: 0
+  40%
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg)
+    animation-timing-function: ease-in
+  60% 
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg)
+    opacity: 1
+  80% 
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg)
+    opacity: 1
+  to 
+    transform: perspective(400px)
+    opacity: 1
+
+@keyframes flipInXY
+  from
+    transform: perspective(400px) rotate3d(1, 1, 0, 90deg)
+    animation-timing-function: ease-in
+    opacity: 0
+  40%
+    transform: perspective(400px) rotate3d(1, 1, 0, -20deg)
+    animation-timing-function: ease-in
+  60% 
+    transform: perspective(400px) rotate3d(1, 1, 0, 10deg)
+    opacity: 1
+  80% 
+    transform: perspective(400px) rotate3d(1, 1, 0, -5deg)
+    opacity: 1
+  to 
+    transform: perspective(400px)
+    opacity: 1
+
+@keyframes w100
+  0% 
+    width: 0%
+  100% 
+    width: 100%
+
+@keyframes w0
+  0% 
+    width: 100%
+  100% 
+    width: 0%
+
+@keyframes h0
+  0% 
+    height: 100%
+  100% 
+    height: 0%
+
+
+/* 水平線方式出現 ps:ie不支援*/
+@keyframes horizontalShow
+  0% 
+    -webkit-clip-path: polygon(50% 0, 50% 0, 50% 100%, 50% 100%)
+    clip-path: polygon(50% 0, 50% 0, 50% 100%, 50% 100%)
+  100% 
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+
+
+/* 垂直線方式出現 ps:ie不支援*/ 
+@keyframes verticalShow
+  0% 
+    -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%)
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%)
+  100% 
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+
+@keyframes show
+  0%
+    display: none
+  100%
+    display: block
+
+@keyframes skewIn
+  0% 
+    transform: skewY(5deg)  translate(0,25%)
+    opacity: 0
+  100%
+    opacity: 1
+    transform: skew(0) translate(0)
+
+
+@keyframes imgSpan
+  0% 
+    width: 0%
+  40% 
+    width: 101%
+    transform: skewX(0deg) translateX(0%)
+  41% 
+    width: 200%
+    transform: skewX(30deg) translateX(-20%)
+  100% 
+    width: 200%
+    transform: skewX(30deg) translateX(80%)
+
+@keyframes imgSpan2
+  0% 
+    width: 0%
+  40% 
+    width: 101%
+    transform: skewX(0deg) translateX(0%)
+  41% 
+    width: 200%
+    transform: skewX(-30deg) translateX(20%)
+  100% 
+    width: 200%
+    transform: skewX(-30deg) translateX(-80%)
+
+
+@keyframes navMenuOpen
+  0% 
+    opacity: 0
+    -webkit-transform: scaleX(0)
+    transform: scaleX(0)
+  100% 
+    opacity: 1
+    -webkit-transform: scaleX(1)
+    transform: scaleX(1)
+
+// 旋轉向上
+@keyframes rotateUp
+  0%
+    transform: rotateY(180deg) translateY(50%)
+    opacity: 0
+  100%
+    transform: rotateY(0deg) translateY(0)
+    opacity: 1
+
+@keyframes topUp
+  from, 20%, 53%, 80% 
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000)
+    top: 0
+  40%, 43% 
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060)
+    top: -15px
+  70% 
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060)
+    top: -7.5px
+  90% 
+    top: -2px
+  to 
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000)
+    top: 0
+
+
+@keyframes showAndHide
+  0% 
+    transform: translateY(100%)
+    opacity: 0
+  33%
+    transform: translateY(0%)
+    opacity: 1
+  66%
+    transform: translateY(0%)
+    opacity: 1
+  100%
+    transform: translateY(-100%)
+    opacity: 0
+
+
+@keyframes scrollDown
+  0% 
+    transform: translateY(0)
+  50%
+    transform: translateY(20px)
+  100%
+    transform: translateY(0)
+
