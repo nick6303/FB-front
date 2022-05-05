@@ -174,7 +174,7 @@ export default defineComponent({
       font-size: 20px
       font-weight: bold
       color: #000400
-  .el-form:deep
+  &:deep(.el-form)
     background-color: #fff
     box-shadow: 0px 3px 0px #000400
     border: 2px solid #000400

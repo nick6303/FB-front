@@ -37,8 +37,7 @@ export default defineComponent({
     width: 530px
     display: flex
     margin: 0 25px 0 0
-#MainContain:deep
-  .is-vertical
-    .el-scrollbar__thumb
-      background-color: #ccc
+#MainContain:deep(.is-vertical)
+  .el-scrollbar__thumb
+    background-color: #ccc
 </style>
