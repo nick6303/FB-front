@@ -17,4 +17,7 @@ export default {
   delete(id) {
     return axios.delete(`${baseUrl}/post/${id}`)
   },
+  upload(data) {
+    return axios.post(`${baseUrl}/post/upload`, data)
+  },
 }

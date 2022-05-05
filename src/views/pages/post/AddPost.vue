@@ -98,14 +98,14 @@ export default defineComponent({
         const ctx = canvas.getContext('2d')
         const img = document.createElement('img')
 
-        img.onload = function () {
+        img.onload = async function () {
           canvas.width = img.width
           canvas.height = img.height
           ctx.drawImage(img, 0, 0, img.width, img.height)
           const base64Img = canvas.toDataURL('image/png')
-          base64Img.replace('data:image/png;base64,', '')
-          formData.image = base64Img
-
+          const test = base64Img.replace('data:image/png;base64,', '')
+          const res = await postApi.upload({ file: test })
+          formData.image = res.data.data.data.link
           canvas.remove()
           img.remove()
         }
