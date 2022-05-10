@@ -47,6 +47,7 @@ import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
 import postApi from '@api/post'
 import { getRules } from '@/utils'
+import router from '@/router'
 
 export default defineComponent({
   name: 'AddPost',
@@ -83,6 +84,7 @@ export default defineComponent({
           type: 'success',
           message: '貼文新增完成',
         })
+        router.push({ path: '/' })
       } catch (error) {
         ElMessage({
           type: 'error',

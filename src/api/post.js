@@ -1,9 +1,11 @@
 import axios from 'axios'
 const baseUrl = process.env.VUE_APP_API_URL
+import { assemblyParams } from '@/utils'
 
 export default {
-  getList() {
-    return axios.get(`${baseUrl}/post`)
+  getList(params) {
+    const queryString = params ? `?${assemblyParams(params)}` : ''
+    return axios.get(`${baseUrl}/post${queryString}`)
   },
   getItemById(id) {
     return axios.get(`${baseUrl}/post/${id}`)

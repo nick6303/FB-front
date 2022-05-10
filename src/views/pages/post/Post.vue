@@ -7,22 +7,27 @@
     el-form-item
       el-select(
         v-model="formData.asc"
+        @change="getPostList"
       )
         el-option(
-          value="asc"
+          value=""
           label="最新貼文"
         )
         el-option(
-          value=""
+          value="asc"
           label="由舊到新"
         )
     el-form-item
       el-input.keyword(
         v-model="formData.keyword"
         placeholder="搜尋貼文"
+        @keyup.enter="getPostList"
       )
         template(#append)
-          el-button(icon="el-icon-search")
+          el-button(
+            icon="el-icon-search" 
+            @click="getPostList"
+          )
   .posts(v-if="postList.length !== 0")
     .post(
       v-for="item in postList"
@@ -56,7 +61,7 @@ export default defineComponent({
   name: 'Post',
   setup() {
     const formData = reactive({
-      asc: 'asc',
+      asc: '',
       keyword: '',
     })
     const loading = ref(false)
@@ -64,7 +69,10 @@ export default defineComponent({
     const getPostList = async () => {
       try {
         loading.value = true
-        const res = await postApi.getList(formData)
+        const res = await postApi.getList({
+          q: formData.keyword,
+          timeSort: formData.asc,
+        })
         postList.value = res.data.data
       } catch {
         // pass
