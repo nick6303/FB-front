@@ -25,9 +25,9 @@
           el-form-item(
             prop="password"
           )
-            el-input(
+            input(
               v-model="loginForm.password"
-              show-password
+              type="password"
               placeholder="Password"
               autocomplete="new-password"
             )
@@ -62,18 +62,18 @@
           el-form-item(
             prop="password"
           )
-            el-input(
+            input(
               v-model="signupform.password"
-              show-password
+              type="password"
               placeholder="Password"
               autocomplete="new-password"
             )
           el-form-item(
             prop="password"
           )
-            el-input(
-              v-model="signupform.password2"
-              show-password
+            input(
+              v-model="signupform.password"
+              type="password"
               placeholder="Password Again"
               autocomplete="new-password"
             )
@@ -114,7 +114,12 @@ export default {
     const login = async () => {
       loading.value = true
       try {
-        await authApi.login({})
+        const res = await authApi.login({
+          email: loginForm.email,
+          password: loginForm.password,
+        })
+
+        console.log(res)
       } catch (error) {
         loginFail.value = true
         // pass
@@ -167,8 +172,21 @@ export default {
         flex-direction: column
         .el-form-item
           width: 100%
-        .el-input__inner
+        .el-input__inner,input
           height: 50px
+          background-color: #FFF
+          border-radius: 4px
+          border: 1px solid #DCDFE6
+          box-sizing: border-box
+          display: inline-block
+          height: 40px
+          line-height: 40px
+          outline: 0
+          padding: 0 15px
+          transition: border-color .2s cubic-bezier(.645,.045,.355,1)
+          width: 100%
+          &::placeholder
+            color: #c0c4cf
         .el-button
           +size(100%,50px)
           +flex-center
