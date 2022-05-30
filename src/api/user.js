@@ -1,20 +1,36 @@
-import axios from 'axios'
-const baseUrl = process.env.VUE_APP_API_URL
+import http from './http'
 
 export default {
   getList() {
-    return axios.get(`${baseUrl}/user`)
+    return http({
+      url: '/user',
+      method: 'get',
+    })
   },
   getItemById(id) {
-    return axios.get(`${baseUrl}/user/${id}`)
+    return http({
+      url: `/user/${id}`,
+      method: 'get',
+    })
   },
   addItem(data) {
-    return axios.post(`${baseUrl}/user`, data)
+    return http({
+      url: '/user',
+      method: 'post',
+      data,
+    })
   },
   update(data, id) {
-    return axios.patch(`${baseUrl}/user/${id}`, data)
+    return http({
+      url: `/user/${id}`,
+      method: 'patch',
+      data,
+    })
   },
   delete(id) {
-    return axios.delete(`${baseUrl}/user/${id}`)
+    return http({
+      url: `/user/${id}`,
+      method: 'delete',
+    })
   },
 }
