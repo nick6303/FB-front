@@ -37,7 +37,7 @@ export default {
   },
   upload(data) {
     return http({
-      url: `/upload/img`,
+      url: '/upload/image',
       method: 'post',
       data,
     })

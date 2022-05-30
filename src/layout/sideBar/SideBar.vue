@@ -44,7 +44,7 @@ export default defineComponent({
     border-radius: 8px
     +flex-center
     color: #fff
-    font-style: 22px
+    font-size: 16px
     font-weight: bold
     margin: 0 0 25px
     cursor: pointer

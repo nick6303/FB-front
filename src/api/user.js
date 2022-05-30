@@ -3,34 +3,47 @@ import http from './http'
 export default {
   getList() {
     return http({
-      url: '/user',
+      url: '/users',
       method: 'get',
     })
   },
   getItemById(id) {
     return http({
-      url: `/user/${id}`,
+      url: `/users/${id}`,
       method: 'get',
     })
   },
   addItem(data) {
     return http({
-      url: '/user',
+      url: '/users/sign_up',
       method: 'post',
       data,
     })
   },
   update(data, id) {
     return http({
-      url: `/user/${id}`,
+      url: `/users/${id}`,
       method: 'patch',
       data,
     })
   },
   delete(id) {
     return http({
-      url: `/user/${id}`,
+      url: `/users/${id}`,
       method: 'delete',
+    })
+  },
+  updateProfile(data) {
+    return http({
+      url: '/users/profile',
+      method: 'patch',
+      data,
+    })
+  },
+  getProfile() {
+    return http({
+      url: '/users/profile',
+      method: 'get',
     })
   },
 }

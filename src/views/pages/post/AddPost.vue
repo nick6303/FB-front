@@ -19,14 +19,9 @@
         resize="none"
       )
     el-form-item
-      el-upload(
-        action
-        :http-request="uploadAction"
-        :before-upload="beforeUpload"
-        accept="image/*"
-        :show-file-list="false"
+      ImgUpload(
+        @change="uploadImg"
       )
-        el-button 上傳圖片
       figure(
         v-if="formData.image"
       )
@@ -48,9 +43,13 @@ import { useStore } from 'vuex'
 import postApi from '@api/post'
 import { getRules } from '@/utils'
 import router from '@/router'
+import ImgUpload from '@c/imgUpload'
 
 export default defineComponent({
   name: 'AddPost',
+  components: {
+    ImgUpload,
+  },
   setup() {
     const store = useStore()
     const user = computed(() => store.state.user)
@@ -93,59 +92,22 @@ export default defineComponent({
       }
     }
 
-    const uploadAction = async (request) => {
-      const { file } = request
-      if (file) {
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
-        const img = document.createElement('img')
-
-        img.onload = async function () {
-          canvas.width = img.width
-          canvas.height = img.height
-          ctx.drawImage(img, 0, 0, img.width, img.height)
-          const base64Img = canvas.toDataURL('image/png')
-          const test = base64Img.replace('data:image/png;base64,', '')
-          const res = await postApi.upload({ file: test })
-          formData.image = res.data.data.data.link
-          canvas.remove()
-          img.remove()
-        }
-
-        img.src = URL.createObjectURL(file)
-      } else {
-        ElMessage({
-          message: '上傳失敗',
-          type: 'error',
-        })
-      }
-    }
-
-    const beforeUpload = (file) => {
-      const pattern = /image/
-      const isAcceptType = pattern.test(file.type)
-      if (!isAcceptType) {
-        ElMessage({
-          message: '僅能上傳圖片',
-          type: 'error',
-        })
-        return false
-      }
-    }
-
     const clearImage = () => {
       formData.image = ''
+    }
+
+    const uploadImg = (url) => {
+      formData.image = url
     }
 
     return {
       formData,
       submit,
-      beforeUpload,
-      uploadAction,
       clearImage,
       elfrom,
       validate,
       rules,
+      uploadImg,
     }
   },
 })
@@ -193,14 +155,7 @@ export default defineComponent({
       border: 2px solid #000400
       border-radius: 0
       +size(470px,170px)
-    .el-upload
-      .el-button
-        background-color: #000400
-        border-radius: 4px
-        +flex-center
-        +size(130px,32px)
-        font-size: 16px
-        color: #fff
+
     figure
       margin: 16px 0 32px
       border: 2px solid #000400

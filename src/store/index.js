@@ -19,6 +19,7 @@ export default createStore({
           state.user[key] = params[key]
         }
       })
+      localStorage.setItem('user', JSON.stringify(state.user))
     },
   },
   actions: {
