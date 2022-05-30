@@ -5,6 +5,9 @@ export default {
     return http({
       url: '/users/sign_in',
       method: 'post',
+      headers: {
+        withOutAuthorization: true,
+      },
       data,
     })
   },

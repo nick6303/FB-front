@@ -21,15 +21,16 @@
             el-input(
               v-model="loginForm.email"
               placeholder="Email"
+              @keydown.enter="login"
             )
           el-form-item(
             prop="password"
           )
-            input(
+            el-input(
               v-model="loginForm.password"
-              type="password"
+              show-password
               placeholder="Password"
-              autocomplete="new-password"
+              @keydown.enter="login"
             )
           el-button(
             @click="login"
@@ -86,12 +87,14 @@
 <script>
 import router from '@/router'
 import { computed, reactive, ref } from 'vue'
+import { useStore } from 'vuex'
 import { getRules } from '@/utils'
 import authApi from '@api/auth'
 
 export default {
   name: 'Login',
   setup() {
+    const store = useStore()
     const isLogin = computed(() => router.currentRoute.value.meta.isLogin)
     const loading = ref(false)
     const loginFail = ref(false)
@@ -118,8 +121,11 @@ export default {
           email: loginForm.email,
           password: loginForm.password,
         })
-
-        console.log(res)
+        const user = res.user
+        store.dispatch('setUser', user)
+        const token = res.token
+        localStorage.setItem('token', token)
+        router.push({ path: '/' })
       } catch (error) {
         loginFail.value = true
         // pass

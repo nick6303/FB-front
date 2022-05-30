@@ -1,7 +1,7 @@
 module.exports = {
   publicPath: '/',
   devServer: {
-    port: 8080,
+    port: 8000,
   },
   chainWebpack: (config) => {
     // pug

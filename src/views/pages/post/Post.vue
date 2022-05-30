@@ -73,7 +73,7 @@ export default defineComponent({
           q: formData.keyword,
           timeSort: formData.asc,
         })
-        postList.value = res.data.data
+        postList.value = res
       } catch {
         // pass
       } finally {

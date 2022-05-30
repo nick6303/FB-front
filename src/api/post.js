@@ -1,25 +1,45 @@
-import axios from 'axios'
-const baseUrl = process.env.VUE_APP_API_URL
+import http from './http'
 import { assemblyParams } from '@/utils'
 
 export default {
   getList(params) {
     const queryString = params ? `?${assemblyParams(params)}` : ''
-    return axios.get(`${baseUrl}/post${queryString}`)
+    return http({
+      url: `/posts${queryString}`,
+      method: 'get',
+    })
   },
   getItemById(id) {
-    return axios.get(`${baseUrl}/post/${id}`)
+    return http({
+      url: `/posts/${id}`,
+      method: 'get',
+    })
   },
   addItem(data) {
-    return axios.post(`${baseUrl}/post`, data)
+    return http({
+      url: `/posts`,
+      method: 'post',
+      data,
+    })
   },
   update(data, id) {
-    return axios.patch(`${baseUrl}/post/${id}`, data)
+    return http({
+      url: `/posts/${id}`,
+      method: 'patch',
+      data,
+    })
   },
   delete(id) {
-    return axios.delete(`${baseUrl}/post/${id}`)
+    return http({
+      url: `/posts/${id}`,
+      method: 'delete',
+    })
   },
   upload(data) {
-    return axios.post(`${baseUrl}/post/upload`, data)
+    return http({
+      url: `/upload/img`,
+      method: 'post',
+      data,
+    })
   },
 }

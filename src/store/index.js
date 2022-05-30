@@ -1,11 +1,15 @@
 import { createStore } from 'vuex'
 const SET_USER = 'SET_USER'
+const localUser = localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user'))
+  : { name: '', photo: '', _id: '' }
+
 export default createStore({
   state: {
     user: {
-      name: 'Member',
-      photo: '',
-      _id: '',
+      name: localUser.name,
+      photo: localUser.photo,
+      _id: localUser._id,
     },
   },
   mutations: {
