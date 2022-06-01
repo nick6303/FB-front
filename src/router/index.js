@@ -3,6 +3,7 @@ import MainContain from '@l/mainContain'
 import { Post, AddPost, UserPost } from '@v/pages/post'
 import Login from '@v/login'
 import Profile from '@v/pages/profile'
+import Following from '@v/pages/following'
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
         path: 'profile',
         name: 'Profile',
         component: Profile,
+      },
+      {
+        path: 'following',
+        name: 'Following',
+        component: Following,
       },
     ],
   },

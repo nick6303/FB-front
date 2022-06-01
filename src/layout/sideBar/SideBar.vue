@@ -8,7 +8,7 @@
           img(:src="user.photo")
         p {{user.name}}
     li
-      a
+      router-link(to="/following") 
         figure
           i.el-icon-bell
         p 追蹤名單
