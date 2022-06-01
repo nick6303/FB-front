@@ -11,4 +11,14 @@ export default {
       data,
     })
   },
+  signup(data) {
+    return http({
+      url: '/users/sign_up',
+      method: 'post',
+      headers: {
+        withOutAuthorization: true,
+      },
+      data,
+    })
+  },
 }

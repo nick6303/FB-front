@@ -46,4 +46,23 @@ export default {
       method: 'get',
     })
   },
+  updatePassword(data) {
+    return http({
+      url: '/users/updatePassword',
+      method: 'post',
+      data,
+    })
+  },
+  followed(userId) {
+    return http({
+      url: `/users/${userId}/follow`,
+      method: 'post',
+    })
+  },
+  unfollowed(userId) {
+    return http({
+      url: `/users/${userId}/follow`,
+      method: 'delete',
+    })
+  },
 }

@@ -1,5 +1,17 @@
 <template lang="pug">
 #Post(v-loading="loading")
+  .userInfoBox
+    .userInfo
+      figure
+        img(:src="pageOwner.photo")
+      .info
+        p.name {{pageOwner.name}}
+        p.followers {{pageOwner.followers.length}}人追蹤
+      el-button(
+        v-if="user._id !== pageOwner._id"
+        @click="toggleFollow"
+        :class="isFollowed ? 'isFollowed':''"
+      ) {{isFollowed ? '取消追蹤':'追蹤'}}
   el-form(
     :model="formData"
     inline
@@ -32,7 +44,7 @@
     .post(
       v-for="item in postList"
     )
-      router-link.user(:to="`/posts/${item.user._id}`")
+      .user
         figure
           img(:src="item.user.photo", alt="alt")
         .info
@@ -54,25 +66,45 @@
       p 目前尚無動態，新增一則貼文吧！
 </template>
 <script>
-import { defineComponent, ref, onMounted, reactive } from 'vue'
+import { defineComponent, ref, onMounted, reactive, computed, watch } from 'vue'
 import postApi from '@api/post'
+import userApi from '@api/user'
+import router from '@/router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-  name: 'Post',
+  name: 'UserPost',
   setup() {
+    const store = useStore()
+    const routerId = computed(() => router.currentRoute.value.params.id)
+    const user = computed(() => store.state.user)
+
+    const pageOwner = reactive({
+      _id: '',
+      photo: '',
+      name: '',
+      followers: [],
+    })
+
     const formData = reactive({
       asc: '',
       keyword: '',
     })
+
     const loading = ref(false)
     const postList = ref([])
+    const isFollowed = computed(
+      () =>
+        user.value.following.findIndex((item) => item.user === pageOwner._id) >
+        -1
+    )
     const getPostList = async () => {
       try {
         loading.value = true
-        const res = await postApi.getList({
-          q: formData.keyword,
-          timeSort: formData.asc,
-        })
+        const res = await postApi.getUserPosts(
+          { q: formData.keyword, timeSort: formData.asc },
+          routerId.value
+        )
         postList.value = res
       } catch {
         // pass
@@ -80,15 +112,48 @@ export default defineComponent({
         loading.value = false
       }
     }
+    const getUser = async () => {
+      const res = await userApi.getItemById(routerId.value)
+      Object.keys(pageOwner).forEach((key) => {
+        if (res[key]) {
+          pageOwner[key] = res[key]
+        }
+      })
+    }
+
+    const toggleFollow = async () => {
+      let api = isFollowed.value ? userApi.unfollowed : userApi.followed
+      try {
+        await api(pageOwner._id)
+        const res = await userApi.getProfile()
+        store.dispatch('setUser', res)
+        getUser()
+      } catch {
+        // pass
+      }
+    }
+
+    watch(routerId, () => {
+      if (router.currentRoute.value.name === 'UserPost') {
+        getPostList()
+        getUser()
+      }
+    })
 
     onMounted(() => {
       getPostList()
+      getUser()
     })
+
     return {
       getPostList,
       formData,
       postList,
       loading,
+      pageOwner,
+      user,
+      isFollowed,
+      toggleFollow,
     }
   },
 })
@@ -130,6 +195,51 @@ export default defineComponent({
       +flex-center
       +size(100%,100%)
 #Post
+  .userInfoBox
+    position: relative
+    &::before
+      +fakeLine(calc(100% - 4px), calc(100% - 4px),#fff)
+      border: 2px solid #000400
+      border-radius: 8px
+      position: absolute
+      top: 5px
+      left: -5px
+      z-index: 0
+  .userInfo
+    border-radius: 8px
+    display: flex
+    align-items: center
+    border: 2px solid #000400
+    overflow: hidden
+    padding: 0 16px 0 0
+    margin: 0 0 16px
+    background-color: #fff
+    position: relative
+    z-index: 1
+    height: 80px
+    figure
+      +size(80px,80px)
+      border-right: 2px solid #000400
+    .info
+      margin: 0 0 0 16px
+      font-size: 16px
+      .name
+        font-weight: bolder
+    &:deep(.el-button)
+      +size(95px,35px)
+      background-color: #EEC32A
+      border: 2px solid #000400
+      border-radius: 8px
+      color: #000400
+      font-weight: bolder
+      font-size: 15px
+      padding: 0
+      +flex-center
+      min-height: auto
+      margin: 0 0 0 auto
+      box-shadow: 0 2px 0 #000400
+      &.isFollowed
+        background-color: #EFECE7
   .posts
     width: 100%
     .post

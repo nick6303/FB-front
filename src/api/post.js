@@ -42,4 +42,11 @@ export default {
       data,
     })
   },
+  getUserPosts(data, id) {
+    return http({
+      url: `/posts/user/${id}`,
+      method: 'get',
+      data,
+    })
+  },
 }

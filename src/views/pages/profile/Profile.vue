@@ -28,6 +28,36 @@
         @click="submitProfile"
       ) 送出更新
     .password(v-else)
+      el-form(
+        :rules="passwordRules"
+        :model="passwordForm"
+        label-position="top"
+        hide-required-asterisk
+      )
+        el-form-item(
+          prop="password"
+          label="輸入新密碼"
+          :rules="[{ required: true, message: '↑此項必填' },{ validator: validatePass, trigger: 'blur' }]"
+        )
+          el-input(
+            v-model="passwordForm.password"
+            show-password
+            type="text"
+          )
+        el-form-item(
+          prop="password2"
+          label="再次輸入"
+          :rules="[{ required: true, message: '↑此項必填' },{ validator: validatePass, trigger: 'blur' }]"
+        )
+          el-input(
+            v-model="passwordForm.password2"
+            show-password
+            type="text"
+          )
+      el-button.submitPassword(
+        :disabled=" !passwordForm.password || passwordForm.password !== passwordForm.password2 "
+        @click="submitPassword"
+      ) 重設密碼
 </template>
 <script>
 import { onMounted, reactive, ref } from 'vue'
@@ -35,6 +65,7 @@ import ImgUpload from '@c/imgUpload'
 import userApi from '@api/user'
 import { useStore } from 'vuex'
 import { getRules } from '@/utils'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'Profile',
@@ -44,16 +75,30 @@ export default {
   setup() {
     const store = useStore()
     const tab = ref('profile')
+
     const profileForm = reactive({
       photo: '',
       name: '',
     })
-
     const profileRules = getRules(profileForm)
 
+    const passwordForm = reactive({
+      password: '',
+      password2: '',
+    })
+    const passwordRules = getRules(passwordForm)
+
     const submitProfile = async () => {
-      const res = await userApi.updateProfile(profileForm)
-      store.dispatch('setUser', res)
+      try {
+        const res = await userApi.updateProfile(profileForm)
+        store.dispatch('setUser', res)
+        ElMessage({
+          type: 'success',
+          message: '修改成功',
+        })
+      } catch {
+        // pass
+      }
     }
 
     const getProfile = async () => {
@@ -66,11 +111,47 @@ export default {
       profileForm.photo = url
     }
 
+    const validatePass = (rule, value, callback) => {
+      if (value.length < 8) {
+        callback(new Error('密碼至少8個字'))
+      } else if (
+        passwordForm.password !== passwordForm.password2 &&
+        passwordForm.password &&
+        passwordForm.password2
+      ) {
+        callback(new Error('兩次輸入密碼不一致'))
+      } else {
+        callback()
+      }
+    }
+
+    const submitPassword = async () => {
+      try {
+        await userApi.updatePassword(passwordForm)
+        ElMessage({
+          type: 'success',
+          message: '修改成功',
+        })
+      } catch {
+        // pass
+      }
+    }
+
     onMounted(() => {
       getProfile()
     })
 
-    return { tab, profileForm, submitProfile, updateImg, profileRules }
+    return {
+      tab,
+      profileForm,
+      submitProfile,
+      updateImg,
+      profileRules,
+      passwordForm,
+      passwordRules,
+      validatePass,
+      submitPassword,
+    }
   },
 }
 </script>
@@ -109,35 +190,42 @@ export default {
   .forms
     width: 100%
     .profile,.password
+      +flex-center
+      flex-direction: column
       border: 2px solid #000400
       border-radius: 8px
       width: 100%
       padding: 30px 105px
       background-color: #fff
     .profile
-      +flex-center
-      flex-direction: column
       .preview
         +size(100px,100px)
         border-radius: 50%
         border: 2px solid #000400
         margin: 0 0 16px
-      &:deep(.submitProfile)
-        +size(260px,55px)
-        background-color: #03438D
-        box-shadow: -2px 2px 0px #000400
-        border: 2px solid #000400
-        border-radius: 8px
-        +flex-center
+    .profile:deep(.submitProfile),
+    .password:deep(.submitPassword)
+      +size(260px,55px)
+      background-color: #03438D
+      box-shadow: -2px 2px 0px #000400
+      border: 2px solid #000400
+      border-radius: 8px
+      +flex-center
+      color: #fff
+      font-size: 16px
+      font-weight: bold
+      margin: 0 0 25px
+      cursor: pointer
+      transition: all .4s ease
+      &:hover
+        background-color: #EEC32A
+        color: #000400
+      &.is-disabled
+        background-color: #A8B0B9
         color: #fff
-        font-size: 16px
-        font-weight: bold
-        margin: 0 0 25px
-        cursor: pointer
-        transition: all .4s ease
-        &:hover
-          background-color: #EEC32A
-          color: #000400
+        box-shadow: 0px 0px 0px #000400
+        border: 2px solid #808080
+        cursor: not-allowed
     &:deep(.el-form)
       width: 320px
       .el-form-item__label

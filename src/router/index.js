@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import MainContain from '@l/mainContain'
-import { Post, AddPost } from '@v/pages/post'
+import { Post, AddPost, UserPost } from '@v/pages/post'
 import Login from '@v/login'
 import Profile from '@v/pages/profile'
 
@@ -34,7 +34,7 @@ const routes = [
       {
         path: 'posts/:id',
         name: 'UserPost',
-        component: Post,
+        component: UserPost,
       },
       {
         path: 'addPost',

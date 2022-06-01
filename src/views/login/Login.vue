@@ -70,10 +70,10 @@
               autocomplete="new-password"
             )
           el-form-item(
-            prop="password"
+            prop="password2"
           )
             input(
-              v-model="signupform.password"
+              v-model="signupform.password2"
               type="password"
               placeholder="Password Again"
               autocomplete="new-password"
@@ -135,6 +135,15 @@ export default {
       }
     }
 
+    const signup = async () => {
+      try {
+        await authApi.signup(signupform)
+        router.push({ path: '/login' })
+      } catch {
+        // pass
+      }
+    }
+
     return {
       isLogin,
       loginForm,
@@ -143,6 +152,7 @@ export default {
       signupRules,
       login,
       loginFail,
+      signup,
     }
   },
 }

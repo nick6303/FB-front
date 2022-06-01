@@ -16,7 +16,7 @@ header#Header
             img(:src="user.photo")
           p {{user.name}}
       
-      router-link(:to="`/posts/${user._id}`") 我的貼文牆
+      button(@click="toMyPost") 我的貼文牆
       router-link(to="/profile") 修改個人資料
       button(@click="logout") 登出
 </template>
@@ -38,10 +38,15 @@ export default {
         name: '',
         photo: '',
         _id: '',
+        followers: [],
+        following: [],
       })
       router.push({ path: '/login' })
     }
-    return { user, logout, visible }
+    const toMyPost = () => {
+      router.push({ path: `/posts/${user.value._id}` })
+    }
+    return { user, logout, visible, toMyPost }
   },
 }
 </script>
