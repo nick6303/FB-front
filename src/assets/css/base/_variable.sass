@@ -156,3 +156,22 @@ $base_gold: #b8803b
 		transform: scaleX(0)
 		transform-origin: 0 50%
 		transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 
+
+@mixin title
+	position: relative
+	margin: 0 0 30px
+	&::before
+		+fakeLine(calc(100% - 4px),calc(100% - 4px),#fff)
+		position: absolute
+		top: 4px
+		left: -4px
+		border: 2px solid #000400
+	p
+		+size(530px,65px)
+		background-color: #fff
+		border: 2px solid #000400
+		position: relative
+		z-index: 1
+		+flex-center
+		font-size: 20px
+		font-weight: bolder

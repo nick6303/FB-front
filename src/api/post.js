@@ -49,4 +49,16 @@ export default {
       data,
     })
   },
+  like(postId) {
+    return http({
+      url: `/posts/${postId}/likes`,
+      method: 'post',
+    })
+  },
+  unlike(postId) {
+    return http({
+      url: `/posts/${postId}/likes`,
+      method: 'delete',
+    })
+  },
 }

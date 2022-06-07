@@ -4,6 +4,7 @@ import { Post, AddPost, UserPost } from '@v/pages/post'
 import Login from '@v/login'
 import Profile from '@v/pages/profile'
 import Following from '@v/pages/following'
+import Likes from '@v/pages/likes'
 
 const routes = [
   {
@@ -51,6 +52,11 @@ const routes = [
         path: 'following',
         name: 'Following',
         component: Following,
+      },
+      {
+        path: 'likes/:id',
+        name: 'likes',
+        component: Likes,
       },
     ],
   },

@@ -159,23 +159,7 @@ export default {
 #Profile
   width: 100%
   .title
-    position: relative
-    margin: 0 0 30px
-    &::before
-      +fakeLine(calc(100% - 4px),calc(100% - 4px),#fff)
-      position: absolute
-      top: 4px
-      left: -4px
-      border: 2px solid #000400
-    p
-      +size(530px,65px)
-      background-color: #fff
-      border: 2px solid #000400
-      position: relative
-      z-index: 1
-      +flex-center
-      font-size: 20px
-      font-weight: bolder
+    +title
   &:deep(.el-radio-group)
     margin: 0 0 0 15px
     .el-radio-button__inner

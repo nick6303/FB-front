@@ -13,7 +13,7 @@
           i.el-icon-bell
         p 追蹤名單
     li
-      a
+      router-link(:to="`/likes/${user._id}`") 
         figure 
           i.icon-thumbup
         p 我按的讚

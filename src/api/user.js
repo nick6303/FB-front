@@ -65,4 +65,10 @@ export default {
       method: 'delete',
     })
   },
+  getLikeList() {
+    return http({
+      url: '/users/getLikeList',
+      method: 'get',
+    })
+  },
 }

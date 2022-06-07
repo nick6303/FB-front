@@ -51,23 +51,7 @@ export default {
 <style lang="sass" scoped>
 #Following
   .title
-    position: relative
-    margin: 0 0 30px
-    &::before
-      +fakeLine(calc(100% - 4px),calc(100% - 4px),#fff)
-      position: absolute
-      top: 4px
-      left: -4px
-      border: 2px solid #000400
-    p
-      +size(530px,65px)
-      background-color: #fff
-      border: 2px solid #000400
-      position: relative
-      z-index: 1
-      +flex-center
-      font-size: 20px
-      font-weight: bolder
+    +title
   .user
     display: flex
     align-items: center
@@ -81,6 +65,7 @@ export default {
       border: 1px solid #000400
       border-radius: 50%
       margin: 0 16px 0 0
+      overflow: hidden
     .info
       width: calc( 100% - 56px )
       .name
