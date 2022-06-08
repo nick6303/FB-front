@@ -6,7 +6,7 @@
     el-radio-group(v-model="tab")
       el-radio-button(label="profile") 暱稱修改
       el-radio-button(label="passwor") 重設密碼
-    .profile(v-if="tab === 'profile'")
+    .profile(v-if="tab === 'profile'" v-loading="loading")
       figure.preview
         img(:src="profileForm.photo")
       ImgUpload(
@@ -75,6 +75,7 @@ export default {
   setup() {
     const store = useStore()
     const tab = ref('profile')
+    const loading = ref(false)
 
     const profileForm = reactive({
       photo: '',
@@ -102,9 +103,16 @@ export default {
     }
 
     const getProfile = async () => {
-      const res = await userApi.getProfile()
-      profileForm.photo = res.photo
-      profileForm.name = res.name
+      loading.value = true
+      try {
+        const res = await userApi.getProfile()
+        profileForm.photo = res.photo
+        profileForm.name = res.name
+      } catch {
+        // pass
+      } finally {
+        loading.value = false
+      }
     }
 
     const updateImg = (url) => {
@@ -151,6 +159,7 @@ export default {
       passwordRules,
       validatePass,
       submitPassword,
+      loading,
     }
   },
 }
@@ -187,6 +196,7 @@ export default {
         border-radius: 50%
         border: 2px solid #000400
         margin: 0 0 16px
+        overflow: hidden
     .profile:deep(.submitProfile),
     .password:deep(.submitPassword)
       +size(260px,55px)

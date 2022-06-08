@@ -6,14 +6,20 @@
       i
       i
   .content
-    p 目前尚無動態，新增一則貼文吧！
+    p {{ routerId === user._id?  '目前尚無動態，新增一則貼文吧！': '目前尚無動態' }}
 </template>
 
 <script>
+import router from '@/router'
+import { useStore } from 'vuex'
+import { computed } from '@vue/runtime-core'
 export default {
   name: 'PostEmpty',
   setup() {
-    return {}
+    const routerId = router.currentRoute.value.params.id
+    const store = useStore()
+    const user = computed(() => store.state.user)
+    return { user, routerId }
   },
 }
 </script>

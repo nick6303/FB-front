@@ -1,5 +1,5 @@
 <template lang="pug">
-#Post(v-loading="loading")
+#Post
   el-form(
     :model="formData"
     inline
@@ -28,13 +28,14 @@
             icon="el-icon-search" 
             @click="getPostList"
           )
-  .posts(v-if="postList.length !== 0")
-    PostItem(
-      v-for="item in postList"
-      :data="item"
-      @refresh="getPostList"
-    )
-  PostEmpty(v-else)
+  .posts(v-loading="loading")
+    template(v-if="postList.length !== 0")
+      PostItem(
+        v-for="(item,index) in postList"
+        :data="item"
+        @refresh="refreshPost(item.id,index)"
+      )
+    PostEmpty(v-else)
 </template>
 <script>
 import { defineComponent, ref, onMounted, reactive } from 'vue'
@@ -55,6 +56,12 @@ export default defineComponent({
     })
     const loading = ref(false)
     const postList = ref([])
+
+    const refreshPost = async (id, index) => {
+      const res = await postApi.getItemById(id)
+      postList.value[index] = res
+    }
+
     const getPostList = async () => {
       try {
         loading.value = true
@@ -78,6 +85,7 @@ export default defineComponent({
       formData,
       postList,
       loading,
+      refreshPost,
     }
   },
 })

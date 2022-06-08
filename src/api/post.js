@@ -61,4 +61,11 @@ export default {
       method: 'delete',
     })
   },
+  addComment(data, postId) {
+    return http({
+      url: `/posts/${postId}/comments/`,
+      method: 'post',
+      data,
+    })
+  },
 }

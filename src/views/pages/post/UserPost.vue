@@ -1,5 +1,5 @@
 <template lang="pug">
-#Post(v-loading="loading")
+#Post
   .userInfoBox
     .userInfo
       figure
@@ -40,14 +40,15 @@
             icon="el-icon-search" 
             @click="getPostList"
           )
-  .posts(v-if="postList.length !== 0")
-    PostItem(
-      v-for="item in postList"
-      :data="item"
+  .posts(v-loading="loading")
+    template(v-if="postList.length !== 0")
+      PostItem(
+        v-for="item in postList"
+        :data="item"
+      )
+    PostEmpty(
+      v-else
     )
-  PostEmpty(
-    v-else
-  )
 </template>
 <script>
 import { defineComponent, ref, onMounted, reactive, computed, watch } from 'vue'
@@ -67,6 +68,7 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const routerId = computed(() => router.currentRoute.value.params.id)
+    const postId = computed(() => router.currentRoute.value.query.postId)
     const user = computed(() => store.state.user)
 
     const pageOwner = reactive({
@@ -91,11 +93,17 @@ export default defineComponent({
     const getPostList = async () => {
       try {
         loading.value = true
-        const res = await postApi.getUserPosts(
-          { q: formData.keyword, timeSort: formData.asc },
-          routerId.value
-        )
-        postList.value = res
+        let res
+        if (postId.value) {
+          res = await postApi.getItemById(postId.value)
+          postList.value = [res]
+        } else {
+          res = await postApi.getUserPosts(
+            { q: formData.keyword, timeSort: formData.asc },
+            routerId.value
+          )
+          postList.value = res
+        }
       } catch {
         // pass
       } finally {
