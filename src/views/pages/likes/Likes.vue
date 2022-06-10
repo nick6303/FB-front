@@ -36,7 +36,6 @@ export default {
       try {
         const res = await userApi.getLikeList()
         likesList.value = res.likeList
-        console.log(likesList.value)
       } catch {
         // pass
       } finally {
